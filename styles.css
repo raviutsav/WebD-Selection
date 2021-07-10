@@ -1,0 +1,158 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body
+{
+    background-color: #001a66;
+}
+
+li, a, button 
+{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #edf0f1;
+    text-decoration: none;
+    padding: 0px;
+}
+
+ul{
+    list-style: none;
+}
+
+ul li
+{
+    display: inline-block;
+    padding: 30px 20px;
+    
+}
+
+nav li a 
+{
+    transition: all 0.3s ease 0.2s;
+    padding-bottom: 10px;
+}
+
+nav li a:hover
+{
+    /* color: rgba(37,99,235, 1); */
+    border-bottom: 3px solid #4d79ff;
+}
+
+button
+{
+    padding: 7px 20px;
+    background-color: rgba(37,99,235, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover
+{
+    background-color: rgba(37,99,235, 0.8);
+
+}
+
+header
+{
+    display: flex;
+    background-color: #001a66;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 7%;
+    margin-bottom: 0px;
+}
+.container
+{
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.new
+{
+    height: 100vh;
+    width: 87vw;
+    border-radius: 5px;
+    background-color: #b3e0ff;
+    box-shadow: -3px -3px 5px #33adff, 3px 3px 15px #33adff;
+}
+
+h1
+{
+    text-align: center;
+    color: #0040ff;
+    padding-top: 20px;
+    font-size: 45px;
+}
+
+.indiaData, .stateData
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+}
+
+.indiaData div
+{
+    display: inline-block;
+    border: 5px solid #4d79ff;
+    height: 100px;
+    width: 175px;
+    margin: 12px;
+    border-radius: 10px;
+}
+
+#stateID-DIV
+{
+    
+
+}
+
+#submit
+{
+    border-radius: 3px;
+}
+
+input[type=text]
+{
+    padding: 7px 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid #b3c6ff;
+    background-color: #b3c6ff;
+    color: #002699;
+}
+input[type=text]:focus
+{
+    border: 4px solid #0040ff;
+}
+
+h3
+{
+    text-align: center;
+    font-size: 32px;
+    color: #3366ff;
+
+}
+
+p
+{
+    text-align: center;
+    color: #1a53ff;
+    font-size: 21px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}

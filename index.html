@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Learning Web Development</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+    <header style="margin-bottom: 7px;">
+        <a href="#" style="text-decoration: none;"><p style="font-size: 30px; color: white;">COVID-19 Dashboard</p></a>
+        <nav>
+            <ul>
+                <li><a href="https://www.cowin.gov.in/" target="_blank">Vaccine Registration</a></li>
+                <li><a href="https://www.covid19india.org/" target="_blank">Covid19 Tracker</a></li>
+                <li><a href="https://www.mohfw.gov.in/" target="_blank">MoHFW</a></li>
+            </ul>
+        </nav>
+        <a href="https://github.com/raviutsav" target="_blank" class="butt"><button><a style="font-size: 18px;">About Me</a></button></a>
+
+    </header>
+
+
+
+    <div class="container">
+        <div class="new">
+            <h1><b>Covid 19 India Dashboard</b></h1>
+            <div class="indiaData">
+                <div class="active">
+                    <p style="margin-bottom: 5px;">Total Active</p>
+                    <p id="indiaActive" style="color: red;"></p>
+                    <p id="activeToday" style="color: red; font-size: 16px;"></p>
+                </div>
+
+                <div class="recovered">
+                    <p style="margin-bottom: 5px;">Total Recovered</p>
+                    <p id="indiaRecovered" style="color: green;"></p>
+                    <p id="recoveredToday" style="color: green; font-size: 16px;"></p>
+                </div>
+
+                <div class="deaths">
+                    <p style="margin-bottom: 5px;"> Total Deaths</p>
+                    <p id="indiaDeaths" style="color: grey;"></p>
+                    <p id="deathToday" style="color: grey; font-size: 16px;"></p>
+                </div>
+
+                <div class="vaccine">
+                    <p style="margin-bottom: 5px;">Total Vaccine</p>
+                    <p id="indiaVaccine" style="color: darkorange;"></p>
+                </div>
+            </div>
+        <br />
+        <h3>Enter an Indian State: </h3>
+        <div class="stateData">
+            <form onsubmit="searchCases(); return false;">
+                <input type="text" id="indianState" name="state" placeholder="">
+                <button type="submit" id="submit">Search</button>
+            </form>
+        </div>
+        <div id="stateID-DIV">
+        <p id="stateID"></p>
+        <p id="invalid-state" style="color:red";></p>
+        </div>
+        </div>
+
+        
+
+    </div>
+    <p>Dashboard last updated at: <span id="lastUpdated"></span></p>
+    <p>Made with &#128151; by <a href="https://github.com/raviutsav" target="_blank" style="font-size: 22px;"><b>Ravi Utsav</b></a></p>
+    <br />
+    
+
+    <script>
+        function capitalize(s)
+        {
+            return s[0].toUpperCase() + s.slice(1);
+        }
+
+            fetch('https://api.covid19india.org/data.json').then(function (response){
+                return response.json();
+            }).then(function (obj){
+
+                let last_data = obj.cases_time_series[(obj.cases_time_series.length)-1];
+                let state_wise = obj.statewise;
+                let tested_wise = obj.tested;
+                let total_active = 0;
+                
+                
+                document.getElementById("indiaActive").innerHTML = state_wise[0].active;
+                document.getElementById("activeToday").innerHTML = last_data.dailyconfirmed + "&#8593";
+
+                document.getElementById("indiaRecovered").innerHTML = last_data.totalrecovered;
+                document.getElementById("recoveredToday").innerHTML = last_data.dailyrecovered + "&#8593";
+
+                document.getElementById("indiaDeaths").innerHTML = last_data.totaldeceased;
+                document.getElementById("deathToday").innerHTML = last_data.dailydeceased + "&#8593";
+
+                document.getElementById("lastUpdated").innerHTML = state_wise[0].lastupdatedtime;
+
+                let last_tested_data = tested_wise[tested_wise.length - 1];
+
+                document.getElementById("indiaVaccine").innerHTML = last_tested_data.totaldosesadministered;
+            }).catch(function (error){
+                console.error('Something went wrong');
+                console.error(error);
+            });
+
+
+
+        function searchCases() {
+            let given_state = document.getElementById('indianState').value;
+            given_state = given_state.toLowerCase();
+            given_state = given_state.replace(/(^\w|\s\w)/g, m => m.toUpperCase()); // to capitalize each word
+            fetch('https://api.covid19india.org/data.json').then(function (response){
+                return response.json();
+            }).then(function (obj){
+
+                let state_data = obj.statewise;
+                let check = 0;
+                for(let i = 0; i < state_data.length; i++)
+                {
+                    if(state_data[i].state == given_state)
+                    {
+                        check = 1;
+                        document.getElementById("stateID").innerHTML = "Total Confirmed Cases: " + state_data[i].confirmed + 
+                            "<br />" + "Total recovered cases: " + state_data[i].recovered + "<br />" +  "Total active Cases: " + state_data[i].active + "<br />" 
+                             + "Total Deceased: " + state_data[i].deaths;
+
+                        document.getElementById("invalid-state").innerHTML = "";
+                        break;
+                    }
+                }
+
+                if(check == 0)
+                {
+                    document.getElementById('stateID').innerHTML = "";
+                    document.getElementById("invalid-state").innerHTML = "Please enter a correct Indian state name"
+                }
+            }).catch(function (error){
+                console.error('Something went wrong');
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
