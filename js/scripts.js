@@ -1,3 +1,10 @@
+const toggleButton = document.getElementById("toggle-button")
+const navbarLinks = document.getElementsByTagName('nav')[0]
+
+toggleButton.addEventListener('click', () => {
+    navbarLinks.classList.toggle('active')
+})
+
 function capitalize(s)
         {
             return s[0].toUpperCase() + s.slice(1);

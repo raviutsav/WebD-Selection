@@ -42,9 +42,83 @@ nav li a:hover
 {
     /* color: rgba(37,99,235, 1); */
     border-bottom: 3px solid #4d79ff;
+    border-radius: 3px;
+}
+
+#toggle-button 
+{
+    position: absolute;
+    top: 1.5rem;
+    right: 4.5rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+#toggle-button .bar
+{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 1110px)
+{
+    #toggle-button
+    {
+        display: flex;
+    }
+    nav
+    {
+        display: none;
+        width: 100%;
+    }
+
+    #aboutt
+    {
+        display: none;
+    }
+
+    header
+    {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav ul
+    {
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    nav li
+    {
+        text-align: center;
+    }
+    nav li a
+    {
+        padding: .5rem 1rem;
+    }
+    nav.active
+    {
+        display: flex;
+    }
+
 }
 
 button
+{
+    padding: 7px 20px;
+    background-color: rgba(37,99,235, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 18px;
+}
+#submit
 {
     padding: 7px 20px;
     background-color: rgba(37,99,235, 1);
