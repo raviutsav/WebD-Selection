@@ -8,6 +8,7 @@ toggleButton.addEventListener('click', () => {
 changeErrorMsg = document.getElementById("indianState");
 changeErrorMsg.addEventListener('click', () =>{
     document.getElementById('invalid-state').innerHTML = "";
+    document.getElementById('stateID').innerHTML = "";
 })
 
 
