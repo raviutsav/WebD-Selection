@@ -11,31 +11,22 @@ changeErrorMsg.addEventListener('click', () =>{
     document.getElementById('stateID').innerHTML = "";
 })
 
-
-fetch('https://api.covid19india.org/data.json').then(function (response){
+fetch('https://api.apify.com/v2/datasets/58a4VXwBBF0HtxuQa/items?format=json&clean=1').then(function (response){
     return response.json();
 }).then(function (obj){
 
-    let last_data = obj.cases_time_series[(obj.cases_time_series.length)-1];
-    let state_wise = obj.statewise;
-    let tested_wise = obj.tested;
-    let total_active = 0;
-    
-    
-    document.getElementById("indiaActive").innerHTML = state_wise[0].active;
-    document.getElementById("activeToday").innerHTML = last_data.dailyconfirmed + "&#8593";
+    let lenn = obj.length;
+    document.getElementById("indiaActive").innerHTML = obj[lenn-1].activeCases;
+    document.getElementById("activeToday").innerHTML = obj[lenn-1].activeCasesNew + "&#8593";
 
-    document.getElementById("indiaRecovered").innerHTML = last_data.totalrecovered;
-    document.getElementById("recoveredToday").innerHTML = last_data.dailyrecovered + "&#8593";
+    document.getElementById("indiaRecovered").innerHTML = obj[lenn-1].recovered;
+    document.getElementById("recoveredToday").innerHTML = obj[lenn-1].recoveredNew + "&#8593";
 
-    document.getElementById("indiaDeaths").innerHTML = last_data.totaldeceased;
-    document.getElementById("deathToday").innerHTML = last_data.dailydeceased + "&#8593";
+    document.getElementById("indiaDeaths").innerHTML = obj[lenn-1].deaths;
+    document.getElementById("deathToday").innerHTML = obj[lenn-1].deathsNew + "&#8593";
 
-    document.getElementById("lastUpdated").innerHTML = state_wise[0].lastupdatedtime;
+    document.getElementById("lastUpdated").innerHTML = obj[lenn-1].lastUpdatedAtApify;
 
-    let last_tested_data = tested_wise[tested_wise.length - 1];
-
-    document.getElementById("indiaVaccine").innerHTML = last_tested_data.totaldosesadministered;
 }).catch(function (error){
     console.error('Something went wrong');
     console.error(error);
